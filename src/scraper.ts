@@ -23,13 +23,14 @@ export async function scrapeArticles(siteUrl: string): Promise<Article[]> {
     const page = await context.newPage();
     
     // ページを開く（タイムアウト60秒）
+    // networkidleではなくloadを使用（より緩い条件）
     await page.goto(siteUrl, {
-      waitUntil: 'networkidle',
+      waitUntil: 'load',
       timeout: 60000,
     });
     
     // ページが完全に読み込まれるまで待機
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     
     // サイトごとに適切なセレクタで記事を取得
     let articles: Article[] = [];
@@ -106,7 +107,7 @@ async function scrapeOpenAI(page: Page): Promise<Article[]> {
     // 各記事の詳細を取得
     for (const article of articles) {
       try {
-        await page.goto(article.url, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(article.url, { waitUntil: 'load', timeout: 30000 });
         await page.waitForTimeout(1000);
         
         // 記事本文を取得
@@ -167,7 +168,7 @@ async function scrapeAnthropic(page: Page): Promise<Article[]> {
     // 各記事の詳細を取得
     for (const article of articles) {
       try {
-        await page.goto(article.url, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(article.url, { waitUntil: 'load', timeout: 30000 });
         await page.waitForTimeout(1000);
         
         // 記事本文を取得
@@ -228,7 +229,7 @@ async function scrapeGoogleBlog(page: Page): Promise<Article[]> {
     // 各記事の詳細を取得
     for (const article of articles) {
       try {
-        await page.goto(article.url, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(article.url, { waitUntil: 'load', timeout: 30000 });
         await page.waitForTimeout(1000);
         
         // 記事本文を取得
