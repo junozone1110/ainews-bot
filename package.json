@@ -1,0 +1,37 @@
+{
+  "name": "ai-news-slack-bot",
+  "version": "1.0.0",
+  "description": "AI関連の最新ニュースをSlackに自動投稿するBot",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "ai",
+    "news",
+    "slack",
+    "automation",
+    "scraping"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/web-api": "^7.0.0",
+    "csv-parse": "^5.5.3",
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.0",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
+
